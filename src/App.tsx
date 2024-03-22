@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import { CartContext } from './store/shopping-cart-context.tsx';
 import { Header } from './components/Header.tsx';
 import { Shop } from './components/Shop.tsx';
 import { Product } from './components/Product.tsx';
@@ -81,8 +81,13 @@ function App() {
     });
   };
 
+  const contextValue = {
+    items: shoppingCart.items,
+    addItemToCart: handleAddItemToCart,
+  };
+
   return (
-    <>
+    <CartContext.Provider value={contextValue}>
       <Header
         cart={shoppingCart}
         onUpdateCartItemQuantity={handleUpdateCartItemQuantity}
@@ -94,7 +99,7 @@ function App() {
           </li>
         ))}
       </Shop>
-    </>
+    </CartContext.Provider>
   );
 }
 

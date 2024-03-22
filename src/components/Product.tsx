@@ -1,10 +1,12 @@
+import { useContext } from 'react';
+import { CartContext } from '../store/shopping-cart-context';
+
 interface ProductProps {
   id: string;
   image: string;
   title: string;
   price: number;
   description: string;
-  onAddToCart: (arg0: string) => void;
 }
 
 export const Product = ({
@@ -13,8 +15,9 @@ export const Product = ({
   title,
   price,
   description,
-  onAddToCart,
 }: ProductProps) => {
+  const { addItemToCart } = useContext(CartContext);
+
   return (
     <article className="product">
       <img src={image} alt={title} />
@@ -25,7 +28,7 @@ export const Product = ({
           <p>{description}</p>
         </div>
         <p className="product-actions">
-          <button onClick={() => onAddToCart(id)}>Add to Cart</button>
+          <button onClick={() => addItemToCart(id)}>Add to Cart</button>
         </p>
       </div>
     </article>

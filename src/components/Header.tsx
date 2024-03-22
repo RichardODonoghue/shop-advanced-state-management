@@ -1,10 +1,10 @@
 import { useRef } from 'react';
 
 import CartModal from './CartModal.tsx';
-import { ShoppingCartState } from '../App.tsx';
+import { ShoppingCart } from '../App.tsx';
 
 interface HeaderProps {
-  cart: ShoppingCartState;
+  cart: ShoppingCart;
   onUpdateCartItemQuantity: (arg0: string, arg1: number) => void;
 }
 

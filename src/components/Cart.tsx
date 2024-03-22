@@ -1,11 +1,12 @@
-import { Item } from '../App';
-
+import { useContext } from 'react';
+import { CartContext } from '../store/shopping-cart-context';
 interface CartProps {
-  items: Item[];
   onUpdateItemQuantity: (arg0: string, arg1: number) => void;
 }
 
-export const Cart = ({ items, onUpdateItemQuantity }: CartProps) => {
+export const Cart = ({ onUpdateItemQuantity }: CartProps) => {
+  const { items } = useContext(CartContext);
+
   const totalPrice = items.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
