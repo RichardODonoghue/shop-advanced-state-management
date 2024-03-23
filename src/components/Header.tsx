@@ -1,5 +1,5 @@
 import { useRef, useContext } from 'react';
-import CartModal from './CartModal.tsx';
+import { CartModal } from './CartModal.tsx';
 import { CartContext } from '../store/shopping-cart-context.tsx';
 
 export const Header = () => {

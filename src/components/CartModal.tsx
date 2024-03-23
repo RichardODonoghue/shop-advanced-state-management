@@ -7,32 +7,29 @@ interface CartModalProps {
   actions: ReactElement;
 }
 
-const CartModal = forwardRef<HTMLDialogElement, CartModalProps>(function Modal(
-  { title, actions },
-  ref
-) {
-  const dialog = useRef<HTMLDialogElement>(null);
+export const CartModal = forwardRef<HTMLDialogElement, CartModalProps>(
+  function Modal({ title, actions }, ref) {
+    const dialog = useRef<HTMLDialogElement>(null);
 
-  useImperativeHandle(
-    ref,
-    () =>
-      ({
-        show: () => dialog.current?.showModal(),
-      } as HTMLDialogElement)
-  );
+    useImperativeHandle(
+      ref,
+      () =>
+        ({
+          show: () => dialog.current?.showModal(),
+        } as HTMLDialogElement)
+    );
 
-  const modalRoot = document.getElementById('modal') as HTMLElement;
+    const modalRoot = document.getElementById('modal') as HTMLElement;
 
-  return createPortal(
-    <dialog id="modal" ref={dialog}>
-      <h2>{title}</h2>
-      <Cart />
-      <form method="dialog" id="modal-actions">
-        {actions}
-      </form>
-    </dialog>,
-    modalRoot
-  );
-});
-
-export default CartModal;
+    return createPortal(
+      <dialog id="modal" ref={dialog}>
+        <h2>{title}</h2>
+        <Cart />
+        <form method="dialog" id="modal-actions">
+          {actions}
+        </form>
+      </dialog>,
+      modalRoot
+    );
+  }
+);
