@@ -1,17 +1,12 @@
-import { useRef } from 'react';
-
+import { useRef, useContext } from 'react';
 import CartModal from './CartModal.tsx';
-import { ShoppingCart } from '../App.tsx';
+import { CartContext } from '../store/shopping-cart-context.tsx';
 
-interface HeaderProps {
-  cart: ShoppingCart;
-  onUpdateCartItemQuantity: (arg0: string, arg1: number) => void;
-}
+export const Header = () => {
+  const { items } = useContext(CartContext);
+  const modal = useRef<HTMLDialogElement>(null);
 
-export const Header = ({ cart, onUpdateCartItemQuantity }: HeaderProps) => {
-  const modal = useRef<HTMLDialogElement>();
-
-  const cartQuantity = cart.items.length;
+  const cartQuantity = items.length;
 
   function handleOpenCartClick() {
     modal.current!.show();
@@ -30,13 +25,7 @@ export const Header = ({ cart, onUpdateCartItemQuantity }: HeaderProps) => {
 
   return (
     <>
-      <CartModal
-        ref={modal}
-        cartItems={cart.items}
-        onUpdateCartItemQuantity={onUpdateCartItemQuantity}
-        title="Your Cart"
-        actions={modalActions}
-      />
+      <CartModal ref={modal} title="Your Cart" actions={modalActions} />
       <header id="main-header">
         <div id="main-title">
           <img src="logo.png" alt="Elegant model" />
